@@ -1,4 +1,4 @@
-import React from "react"
+import React from "react";
 import Base from "../Base/Base";
 import data from "../Data/Data";
 import Addstudents from "./Addstudents"

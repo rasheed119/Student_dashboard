@@ -25,33 +25,39 @@ function Addstudents({student,setstudent}){
 
   return(
     <div className="addstudents">
+
       <input
       type="text"
       placeholder="Enter name"
       value={name}
       onChange={(e)=>setname(e.target.value)}
       />
+
       <input
       type="text"
       placeholder="Enter qualification"
       value={qualification}
       onChange={(e)=>setqualification(e.target.value)}
       />
+
       <input
       type="text"
       placeholder="Enter Batch"
       value={batch}
       onChange={(e)=>setbatch(e.target.value)}
       />
+
       <input
       type="text"
       placeholder="Enter Gender"
       value={gender}
       onChange={(e)=>setgender(e.target.value)}
       />
+
       <Button variant="primary"
       onClick={add_data}
       >Add Student</Button>
+      
     </div>
   );
 }

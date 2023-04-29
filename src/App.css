@@ -2,6 +2,10 @@
   padding: 0px;
   margin: 0px;
 }
+
+#root{
+  background-color: gray;
+}
  
 .main-component{
   display: flex;
@@ -35,4 +39,10 @@
   border: 1px solid black;
   padding: 10px;
   gap: 0.5rem;
+}
+.addstudents span button{
+  white-space: nowrap;
+}
+.container .row .card{
+  margin-top: 10px;
 }

@@ -1,31 +1,35 @@
-import React from "react";
+import React, { useEffect } from 'react'
 import { useState } from "react";
 import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-function Addstudents({student,setstudent}){
+function Updatestudents({student, setstudent, index}) {
+  const editstudent  = student[index];
   const [name,setname] = useState("");
   const [qualification,setqualification] = useState("");
   const [gender,setgender] = useState("");
   const [batch,setbatch] = useState("");
 
-  function add_data(){
-    const new_data = {
+  useEffect(()=>{
+    setname(editstudent.name);
+    setbatch(editstudent.batch);
+    setqualification(editstudent.qualification);
+    setgender(editstudent.gender);
+  },[editstudent]);
+
+  function updatestudent(){
+    const updatedstudent = {
       name,
-      batch,
       qualification,
+      batch,
       gender
     };
-    setstudent([...student,new_data]);
-    setname("");
-    setbatch("")
-    setgender("");
-    setqualification("");
+    student[index] = updatedstudent;
+    setstudent([...student]);
   }
 
-  return(
-    <div className="addstudents">
-
+  return (
+    <div className='addstudents'>
       <input
       type="text"
       placeholder="Enter name"
@@ -56,11 +60,11 @@ function Addstudents({student,setstudent}){
 
       <span>
       <Button variant="primary"
-      onClick={add_data}
-      >Add Student</Button>
+      onClick={updatestudent}
+      >Update Student</Button>
       </span>
     </div>
-  );
+  )
 }
-export default Addstudents;
 
+export default Updatestudents

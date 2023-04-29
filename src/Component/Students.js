@@ -6,9 +6,11 @@ import { useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import Updatestudents from "./Updatestudents";
 
 export default function Students(){
   const [student , setstudent] = useState(data);
+  const [index , setindex] = useState();
 
   const deletestudent = (studidx)=>{
     const remainingstudent = student.filter((stdobj,idx)=> idx !== studidx);
@@ -27,6 +29,17 @@ export default function Students(){
           student = {student}
           setstudent = {setstudent}
           />
+
+          <br/>
+
+          <Updatestudents
+          student = {student}
+          setstudent = {setstudent}
+          index = {index}
+          />
+
+          <br/>
+
         </div>
         <div className="row">
           
@@ -46,10 +59,14 @@ export default function Students(){
           Gender : {stud.gender}
         </Card.Text>
         <div>
-        <Button variant="primary">Edit</Button>
+        <Button variant="primary"
+        onClick={()=>setindex(idx)}
+        >Edit</Button>
+
         <Button variant="danger"
         onClick = {()=>deletestudent(idx)}
         >Delete</Button>
+
         </div>
       </Card.Body>
     </Card>

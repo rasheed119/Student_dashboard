@@ -10,12 +10,12 @@ function Updatestudents({student, setstudent, index}) {
   const [gender,setgender] = useState("");
   const [batch,setbatch] = useState("");
 
-  useEffect(()=>{
+/*   useEffect(()=>{
     setname(editstudent.name);
     setbatch(editstudent.batch);
     setqualification(editstudent.qualification);
     setgender(editstudent.gender);
-  },[editstudent]);
+  },[editstudent]); */
 
   function updatestudent(){
     const updatedstudent = {

@@ -3,8 +3,14 @@
   margin: 0px;
 }
 
-#root{
-  background-color: gray;
+div.App{
+  background-color: grey;
+  height: fit-content;
+}
+
+input{
+  padding: 10px;
+  border-radius: 5px;
 }
  
 .main-component{
@@ -44,5 +50,8 @@
   white-space: nowrap;
 }
 .container .row .card{
-  margin-top: 10px;
+  margin: 10px;
+}
+.button button{
+  margin: 10px;
 }

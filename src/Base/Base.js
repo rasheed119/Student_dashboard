@@ -1,8 +1,23 @@
 import React from "react";
+import Button from 'react-bootstrap/Button';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const Base = ({Title,Description,children})=>{
+  const history = useHistory();
   return(
     <div className="main-component base component">
+      <div className="button">
+
+      <Button className="primary"
+      onClick={()=>history.push("/")}
+      >Dashboard</Button>
+
+      <Button className="primary"
+      onClick={()=>history.push("/add")}
+      >Add Students</Button>
+      
+      </div>
       <header className="heading">
         <h1>{Title}</h1>
       </header>

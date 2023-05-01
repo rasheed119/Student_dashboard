@@ -1,16 +1,15 @@
 import React from "react";
 import Base from "../Base/Base";
-import data from "../Data/Data";
-import Addstudents from "./Addstudents"
 import { useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import Updatestudents from "./Updatestudents";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
-export default function Students(){
-  const [student , setstudent] = useState(data);
+
+export default function Students({student,setstudent}){
   const [index , setindex] = useState();
+  const history = useHistory();
 
   const deletestudent = (studidx)=>{
     const remainingstudent = student.filter((stdobj,idx)=> idx !== studidx);
@@ -24,23 +23,7 @@ export default function Students(){
     >
 
       <div className="container">
-        <div>
-          <Addstudents
-          student = {student}
-          setstudent = {setstudent}
-          />
 
-          <br/>
-
-          <Updatestudents
-          student = {student}
-          setstudent = {setstudent}
-          index = {index}
-          />
-
-          <br/>
-
-        </div>
         <div className="row">
           
         {student.map((stud,idx)=>(
@@ -60,7 +43,7 @@ export default function Students(){
         </Card.Text>
         <div>
         <Button variant="primary"
-        onClick={()=>setindex(idx)}
+        onClick={()=>history.push(`/update/${idx}`)}
         >Edit</Button>
 
         <Button variant="danger"

@@ -8,7 +8,6 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 
 export default function Students({student,setstudent}){
-  const [index , setindex] = useState();
   const history = useHistory();
 
   const deletestudent = (studidx)=>{

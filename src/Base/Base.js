@@ -10,13 +10,13 @@ const Base = ({Title,Description,children})=>{
       <div className="button">
 
       <Button className="primary"
-      onClick={()=>history.push("/")}
+      onClick={()=>history.push("/homepage")}
       >Dashboard</Button>
 
       <Button className="primary"
       onClick={()=>history.push("/add")}
       >Add Students</Button>
-      
+
       </div>
       <header className="heading">
         <h1>{Title}</h1>

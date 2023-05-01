@@ -34,12 +34,10 @@ function Updatestudents({student, setstudent}) {
       gender
     };
     student[id] = updatedstudent;
+
     setstudent([...student]);
-    setname("");
-    setbatch("")
-    setgender("");
-    setqualification("");
-    return history.push("/");
+
+    return history.push("/homepage");
   }
 
   return (

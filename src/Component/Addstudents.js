@@ -28,7 +28,7 @@ function Addstudents({student,setstudent}){
     setgender("");
     setqualification("");
 
-    return history.push("/");
+    return history.push("/homepage");
   }
 
   return(

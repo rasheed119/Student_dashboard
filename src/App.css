@@ -15,14 +15,6 @@ div.App{
   justify-content: center;
   flex-direction: column;
 }
-.Welcome h3 a{
-  text-decoration: none;
-  color: #212529;
-}
-.Welcome h3 a:hover{
-  color: blue;
-  text-decoration: underline;
-}
 
 input{
   padding: 10px;

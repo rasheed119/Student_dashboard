@@ -2,15 +2,26 @@ import { Route, Switch } from 'react-router-dom';
 import './App.css';
 import Students from "./Component/Students"
 import Addstudents from './Component/Addstudents';
-import data from "./Data/Data";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Updatestudents from "./Component/Updatestudents";
 import Nopage from './Component/Nopage';
 import Welcome from './Component/Welcome';
 import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
 
 function App() {
-  const [student , setstudent] = useState(data);
+  const [student , setstudent] = useState([]);
+  useEffect(()=>{
+    const getstudents = async() => {
+      const responce =  await fetch("https://644e27f41b4567f4d580f5c6.mockapi.io/users",{
+        method : "GET"
+      });
+      const data = await responce.json();
+      if(data){
+        setstudent(data);
+      }
+    }
+    getstudents();
+  },[])
   return (
     <div className="App bg-secondary">
       <Switch>

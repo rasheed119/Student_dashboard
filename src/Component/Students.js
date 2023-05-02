@@ -1,18 +1,27 @@
 import React from "react";
 import Base from "../Base/Base";
-import { useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 
 export default function Students({student,setstudent}){
   const history = useHistory();
 
-  const deletestudent = (studidx)=>{
-    const remainingstudent = student.filter((stdobj,idx)=> idx !== studidx);
-    setstudent(remainingstudent);
+  const deletestudent = async(studidx)=>{
+    
+    const responce = await fetch(`https://644e27f41b4567f4d580f5c6.mockapi.io/users/${studidx}`,{
+      method : "DELETE"
+    })
+    const data = await responce.json();
+
+    if(data){
+      const remainingstudent = student.filter((stdobj,idx)=> stdobj.id !== studidx);
+      setstudent(remainingstudent);
+    }
   }
 
   return(
@@ -23,9 +32,10 @@ export default function Students({student,setstudent}){
 
       <div className="container">
 
-        <div className="row">
+        <Row>
           
         {student.map((stud,idx)=>(
+          <Col>
         <Card style={{ width: '18rem' }} key={idx}>
       <Card.Body>
         <Card.Text>
@@ -42,18 +52,19 @@ export default function Students({student,setstudent}){
         </Card.Text>
         <div>
         <Button variant="primary"
-        onClick={()=>history.push(`/update/${idx}`)}
+        onClick={()=>history.push(`/update/${stud.id}`)}
         >Edit</Button>
 
         <Button variant="danger"
-        onClick = {()=>deletestudent(idx)}
+        onClick = {()=>deletestudent(stud.id)}
         >Delete</Button>
 
         </div>
       </Card.Body>
     </Card>
+    </Col>
     ))}
-        </div>
+      </Row>
       </div>
     </Base>
   )

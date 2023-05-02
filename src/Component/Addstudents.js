@@ -15,18 +15,25 @@ function Addstudents({student,setstudent}){
 
   const history = useHistory();
 
-  function add_data(){
+  async function add_data(){
     const new_data = {
       name,
       batch,
       qualification,
       gender
     };
-    setstudent([...student,new_data]);
-    setname("");
-    setbatch("")
-    setgender("");
-    setqualification("");
+
+    const responce = await fetch("https://644e27f41b4567f4d580f5c6.mockapi.io/users",{
+      method : "POST",
+      body : JSON.stringify(new_data),
+      headers : {
+        "Content-Type" : "application/json"
+      }
+    })
+
+    const data = await responce.json();
+
+    setstudent([...student,data]);
 
     return history.push("/homepage");
   }

@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 import Base from "../Base/Base"
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
-function Updatestudents({student, setstudent}) {
+ function Updatestudents({student, setstudent}) {
 
   const {id} = useParams();
 
@@ -26,18 +26,31 @@ function Updatestudents({student, setstudent}) {
     setbatch(editstudent.batch);
   },[student]);
 
-  function updatestudent(){
+  async function updatestudent(){
     const updatedstudent = {
       name,
       qualification,
       batch,
       gender
     };
-    student[id] = updatedstudent;
 
-    setstudent([...student]);
+    const responce = await fetch(`https://644e27f41b4567f4d580f5c6.mockapi.io/users/${editstudent.id}`,{
+      method : "PUT",
+      body : JSON.stringify(updatedstudent),
+      headers : {
+        "Content-Type" : "application/json"
+      }
+    })
+    const data = await responce.json();
 
-    return history.push("/homepage");
+    if(data){
+
+      student[id] = updatedstudent;
+
+      setstudent([...student]);
+
+      history.push("/homepage");
+    }
   }
 
   return (

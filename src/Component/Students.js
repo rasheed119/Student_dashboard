@@ -4,12 +4,26 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useState,useEffect } from "react";
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 
 export default function Students({student,setstudent}){
   const history = useHistory();
+
+  const [count, setcount] = useState()
+
+  useEffect(()=>{
+    const getstudents = async() => {
+      const responce =  await fetch("https://644e27f41b4567f4d580f5c6.mockapi.io/users",{
+        method : "GET"
+      });
+      const students_count = await responce.json();
+      setcount(students_count.length);
+    }
+    getstudents();
+  },[])
 
   const deletestudent = async(studidx)=>{
     
@@ -21,6 +35,7 @@ export default function Students({student,setstudent}){
     if(data){
       const remainingstudent = student.filter((stdobj,idx)=> stdobj.id !== studidx);
       setstudent(remainingstudent);
+      setcount(remainingstudent.length);
     }
   }
 
@@ -31,6 +46,10 @@ export default function Students({student,setstudent}){
     >
 
       <div className="container">
+
+        <div>
+          <h4>Total Students : {count}</h4>
+        </div>
 
         <Row>
           

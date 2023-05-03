@@ -24,7 +24,7 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
     setgender(editstudent.gender);
     setqualification(editstudent.qualification);
     setbatch(editstudent.batch);
-  },[student]);
+  },[editstudent]);
 
   async function updatestudent(){
     const updatedstudent = {

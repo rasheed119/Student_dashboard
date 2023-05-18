@@ -1,27 +1,38 @@
 import React from "react";
-import { useState } from "react";
 import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Base from "../Base/Base"
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import * as yup from 'yup';
+import { useFormik } from "formik";
+
+export const fieldValidationScheme = yup.object({
+  name : yup.string().required("Please fill in students name"),
+  batch : yup.string().required("Please fill in the student batch").min(5,"Please fill the valid batch name"),
+  qualification : yup.string().required("Please fill the student qualification"),
+  gender : yup.string().required("Please fill in the gender")
+})
 
 function Addstudents({student,setstudent}){
 
-
-  const [name,setname] = useState("");
-  const [qualification,setqualification] = useState("");
-  const [gender,setgender] = useState("");
-  const [batch,setbatch] = useState("");
+  const {handleSubmit,values,handleChange,handleBlur,touched,errors} = useFormik({
+    initialValues :{
+      name : "",
+      batch : "",
+      qualification : "",
+      gender : ""
+    },
+    validationSchema : fieldValidationScheme,
+    onSubmit : (new_data)=>{
+      add_data(new_data)
+    }
+  })
 
   const history = useHistory();
 
-  async function add_data(){
-    const new_data = {
-      name,
-      batch,
-      qualification,
-      gender
-    };
+
+
+  async function add_data(new_data){
 
     const responce = await fetch("https://644e27f41b4567f4d580f5c6.mockapi.io/users",{
       method : "POST",
@@ -44,40 +55,51 @@ function Addstudents({student,setstudent}){
     Description={"Enter details to add Students"}
     >
     <div className="addstudents">
-
+      <form onSubmit={handleSubmit}>
+        
       <input
-      type="text"
+      type="name"
       placeholder="Enter name"
-      value={name}
-      onChange={(e)=>setname(e.target.value)}
+      onBlur={handleBlur}
+      name="name"
+      value={values.name}
+      onChange={handleChange}
       />
 
       <input
-      type="text"
+      type="qualification"
       placeholder="Enter qualification"
-      value={qualification}
-      onChange={(e)=>setqualification(e.target.value)}
+      onBlur={handleBlur}
+      name="qualification"
+      value={values.qualification}
+      onChange={handleChange}
       />
 
       <input
-      type="text"
+      type="batch"
+      name="batch"
       placeholder="Enter Batch"
-      value={batch}
-      onChange={(e)=>setbatch(e.target.value)}
+      onBlur={handleBlur}
+      value={values.batch}
+      onChange={handleChange}
       />
 
       <input
-      type="text"
+      type="gender"
+      name="gender"
+      onBlur={handleBlur}
       placeholder="Enter Gender"
-      value={gender}
-      onChange={(e)=>setgender(e.target.value)}
+      value={values.gender}
+      onChange={handleChange}
       />
 
       <span>
       <Button variant="primary"
-      onClick={add_data}
+      type="submit"
       >Add Student</Button>
       </span>
+      </form>
+
     </div>
     </Base>
   );
